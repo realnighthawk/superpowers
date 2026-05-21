@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "fitness-daily-checkin",
+      "name": "Fitness daily check-in",
+      "description": "Morning fitness plan + Discord follow-up via fitness-coach agent.",
+      "enabled": true,
+      "agentId": "fitness-coach",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * *",
+        "tz": "America/Los_Angeles"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Daily fitness check-in (America/Los_Angeles). Follow AGENTS.md and HEARTBEAT.md: if coaching.lastDailyPlanDate is not today, build workout + diet, spawn zuzu (personal ops only) to post chart via fitness-discord-post-chart skill, then deliver a short summary. If already planned today, send a brief accountability check-in only.",
+        "lightContext": true
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:REPLACE_DISCORD_FITNESS_CHANNEL_ID"
+      },
+      "state": {}
+    }
+  ]
+}

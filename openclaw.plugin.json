@@ -1,0 +1,33 @@
+{
+  "id": "nighthawk-superpowers",
+  "name": "Nighthawk Superpowers",
+  "description": "Multi-agent team (Zuzu, SRE, Coder, Fitness Coach, Illustrator), bundled skills, profile tools, and superpowers apply CLI.",
+  "activation": {
+    "onStartup": false
+  },
+  "skills": [
+    "./bundle/skills"
+  ],
+  "contracts": {
+    "tools": ["user_profile_get", "user_profile_update"]
+  },
+  "toolMetadata": {
+    "user_profile_get": { "optional": true },
+    "user_profile_update": { "optional": true }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      }
+    }
+  },
+  "uiHints": {
+    "enabled": {
+      "label": "Enabled",
+      "help": "Enable Nighthawk Superpowers profile tools (skills load when the plugin is enabled)."
+    }
+  }
+}

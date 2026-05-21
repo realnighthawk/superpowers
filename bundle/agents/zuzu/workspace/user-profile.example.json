@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "userId": "nighthawk",
+  "displayName": "nighthawk",
+  "discordUserId": "REPLACE_DISCORD_USER_ID",
+  "timezone": "America/Los_Angeles",
+  "goals": ["general fitness"],
+  "injuries": [],
+  "equipment": ["bodyweight"],
+  "diet": {
+    "restrictions": [],
+    "calorieTarget": null,
+    "proteinTargetG": null
+  },
+  "fitness": {
+    "experience": "beginner",
+    "daysPerWeek": 3,
+    "preferredSplit": "full_body",
+    "sessionMinutes": 45
+  },
+  "metrics": {
+    "weightKg": null,
+    "heightCm": null,
+    "age": null
+  },
+  "integrations": {
+    "discordFitnessChannelId": "REPLACE_DISCORD_FITNESS_CHANNEL_ID",
+    "googleCalendarId": "REPLACE_GOOGLE_CALENDAR_ID",
+    "googleAccount": "REPLACE_GOOGLE_ACCOUNT_EMAIL"
+  },
+  "coaching": {
+    "lastDailyPlanDate": null,
+    "lastDiscordMessageId": null,
+    "checkInHourLocal": 7
+  }
+}

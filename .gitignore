@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# TypeScript build
+dist/
+*.tsbuildinfo
+
+# Secrets and local env (never commit API keys)
+.env
+.env.*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Editor / IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+*~

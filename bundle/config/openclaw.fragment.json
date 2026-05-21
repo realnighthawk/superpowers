@@ -1,0 +1,216 @@
+{
+  "_comment": "Merge into openclaw.json. Replace REPLACE_STATE_DIR with your OpenClaw state dir (e.g. /home/you/.openclaw). Enable companion plugins separately.",
+  "browser": {
+    "ssrfPolicy": {
+      "dangerouslyAllowPrivateNetwork": true
+    }
+  },
+  "auth": {
+    "profiles": {
+      "google:free": { "provider": "google", "mode": "api_key" },
+      "google:paid": { "provider": "google", "mode": "api_key" }
+    },
+    "order": {
+      "google": ["google:free", "google:paid"]
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": { "primary": "google/gemini-3-flash-preview" },
+      "imageGenerationModel": {
+        "primary": "openai/stable-diffusion",
+        "timeoutMs": 180000
+      },
+      "mediaGenerationAutoProviderFallback": false,
+      "startupContext": {
+        "enabled": true,
+        "dailyMemoryDays": 3,
+        "maxFileChars": 2000,
+        "maxTotalChars": 4000
+      }
+    },
+    "list": [
+      {
+        "id": "zuzu",
+        "default": true,
+        "name": "Zuzu",
+        "workspace": "REPLACE_STATE_DIR/agents/zuzu/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/zuzu/agent",
+        "model": "google/gemini-3-flash-preview",
+        "skills": [
+          "gog",
+          "zuzu-personal",
+          "discord",
+          "fitness-discord-post-chart",
+          "calendar-fitness-block"
+        ],
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "sessions_list",
+            "agents_list",
+            "session_status",
+            "user_profile_get",
+            "user_profile_update",
+            "message",
+            "exec",
+            "process"
+          ],
+          "deny": ["write", "edit", "apply_patch", "browser"],
+          "exec": { "security": "allowlist", "ask": "on-miss" }
+        },
+        "subagents": {
+          "allowAgents": ["zuzu", "coder", "sre", "fitness-coach", "illustrator"],
+          "delegationMode": "prefer"
+        },
+        "identity": {
+          "name": "Zuzu",
+          "emoji": "🦉",
+          "theme": "Personal assistant (Discord steward)"
+        }
+      },
+      {
+        "id": "sre",
+        "name": "SRE",
+        "workspace": "REPLACE_STATE_DIR/agents/sre/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/sre/agent",
+        "model": "google/gemini-3.1-pro-preview",
+        "skills": ["k8s-debug", "taskflow"],
+        "tools": {
+          "profile": "coding",
+          "deny": ["browser"],
+          "alsoAllow": ["exec", "process", "memory_search", "memory_get"],
+          "exec": { "security": "allowlist", "ask": "always" }
+        }
+      },
+      {
+        "id": "coder",
+        "name": "Coder",
+        "workspace": "REPLACE_STATE_DIR/agents/coder/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/coder/agent",
+        "model": "google/gemini-3.1-pro-preview",
+        "skills": ["taskflow"],
+        "tools": {
+          "profile": "coding",
+          "alsoAllow": ["sessions_history", "memory_search", "memory_get"],
+          "deny": ["browser"],
+          "exec": { "security": "allowlist", "ask": "on-miss" }
+        },
+        "subagents": {
+          "allowAgents": ["coder"],
+          "delegationMode": "prefer"
+        }
+      },
+      {
+        "id": "fitness-coach",
+        "name": "Fitness Coach",
+        "workspace": "REPLACE_STATE_DIR/agents/fitness-coach/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/fitness-coach/agent",
+        "model": "google/gemini-3-flash-preview",
+        "skills": ["fitness-trainer", "fitness-workout", "fitness-diet"],
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "sessions_list",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update"
+          ],
+          "exec": { "security": "allowlist", "ask": "always" }
+        },
+        "subagents": {
+          "allowAgents": ["zuzu", "fitness-coach"],
+          "delegationMode": "prefer"
+        },
+        "heartbeat": { "every": "8h", "lightContext": true },
+        "identity": {
+          "name": "Fitness Coach",
+          "emoji": "💪",
+          "theme": "Workout and nutrition coaching"
+        }
+      },
+      {
+        "id": "illustrator",
+        "name": "Illustrator",
+        "workspace": "REPLACE_STATE_DIR/agents/illustrator/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/illustrator/agent",
+        "model": "google/gemini-3-flash-preview",
+        "skills": ["illustrator-generate"],
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": ["image_generate", "image", "read", "memory_search", "memory_get"],
+          "deny": [
+            "browser",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "process",
+            "sessions_spawn",
+            "message"
+          ]
+        },
+        "subagents": { "allowAgents": ["illustrator"] },
+        "identity": {
+          "name": "Illustrator",
+          "emoji": "🎨",
+          "theme": "Sketches and image generation"
+        }
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "agentId": "zuzu",
+      "match": { "channel": "discord" }
+    }
+  ],
+  "plugins": {
+    "allow": [
+      "nighthawk-superpowers",
+      "discord",
+      "google",
+      "openai",
+      "memory-core",
+      "lossless-claw",
+      "diagnostics-otel"
+    ],
+    "entries": {
+      "nighthawk-superpowers": { "enabled": true },
+      "discord": { "enabled": true },
+      "google": { "enabled": true },
+      "openai": { "enabled": true },
+      "memory-core": {
+        "enabled": true,
+        "config": {
+          "dreaming": {
+            "enabled": true,
+            "frequency": "0 3 * * *",
+            "model": "google/gemini-3-flash-preview"
+          }
+        }
+      },
+      "lossless-claw": { "enabled": true }
+    },
+    "slots": {
+      "memory": "memory-core",
+      "contextEngine": "lossless-claw"
+    }
+  },
+  "commands": {
+    "ownerAllowFrom": ["discord:REPLACE_DISCORD_USER_ID"]
+  }
+}

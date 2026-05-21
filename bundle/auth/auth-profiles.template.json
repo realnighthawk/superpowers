@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "profiles": {
+    "google:free": {
+      "type": "api_key",
+      "provider": "google",
+      "keyRef": {
+        "source": "env",
+        "provider": "default",
+        "id": "GEMINI_API_KEY"
+      }
+    },
+    "google:paid": {
+      "type": "api_key",
+      "provider": "google",
+      "keyRef": {
+        "source": "env",
+        "provider": "default",
+        "id": "GEMINI_API_KEY_PAID"
+      }
+    },
+    "openai:default": {
+      "type": "api_key",
+      "provider": "openai",
+      "keyRef": {
+        "source": "env",
+        "provider": "default",
+        "id": "LITELLM_API_KEY"
+      }
+    }
+  }
+}

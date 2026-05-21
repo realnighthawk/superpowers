@@ -1,0 +1,49 @@
+{
+  "name": "openclaw-nighthawk-superpowers",
+  "version": "0.1.0",
+  "description": "Portable OpenClaw bundle: multi-agent team, skills, auth templates, profile tools, and apply CLI",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "index.ts",
+    "openclaw.plugin.json",
+    "bundle"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "preplugin:install-local": "npm run build",
+    "plugin:inspect": "openclaw plugins inspect nighthawk-superpowers --runtime",
+    "plugin:install-local": "openclaw plugins install . && openclaw plugins enable nighthawk-superpowers"
+  },
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "runtimeExtensions": ["./dist/index.js"],
+    "install": {
+      "localPath": ".",
+      "defaultChoice": "local"
+    },
+    "compat": {
+      "pluginApi": ">=2026.5.12",
+      "minGatewayVersion": ">=2026.5.12"
+    },
+    "build": {
+      "openclawVersion": "2026.5.12",
+      "pluginSdkVersion": "2026.5.12"
+    }
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.41"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.5.12"
+  },
+  "devDependencies": {
+    "openclaw": "2026.5.12",
+    "typescript": "^5.8.3"
+  }
+}
