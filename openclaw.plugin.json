@@ -1,7 +1,7 @@
 {
   "id": "nighthawk-superpowers",
   "name": "Nighthawk Superpowers",
-  "description": "Multi-agent team (Zuzu, SRE, Coder, Fitness Coach, Illustrator), bundled skills, profile tools, and superpowers apply CLI.",
+  "description": "Multi-agent personal ecosystem: Zuzu (coordinator), fitness-coach, productivity, finance, creative, learning, sysadmin, and social agents. Bundled skills and profile tools.",
   "activation": {
     "onStartup": false
   },

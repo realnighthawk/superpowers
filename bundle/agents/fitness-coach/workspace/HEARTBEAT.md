@@ -4,5 +4,6 @@ If nothing to do: `HEARTBEAT_OK`.
 
 Otherwise:
 
-- Spawn **`zuzu`** with `user_profile_get`; compare `coaching.fitness.lastDailyPlanDate` to today (America/Los_Angeles).
-- If missing, run daily plan workflow and spawn Zuzu to post chart.
+- Check `coaching.fitness.lastDailyPlanDate` from profile slice (available at startup); compare to today (America/Los_Angeles).
+- If the date is not today: build workout + diet plan, then spawn **Zuzu** for personal ops only.
+- If already planned today: return `CHECKIN_DONE`.

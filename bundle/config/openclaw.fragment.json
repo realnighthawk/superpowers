@@ -1,5 +1,5 @@
 {
-  "_comment": "Merge into openclaw.json. Replace all REPLACE_* tokens. Enable companion plugins separately.",
+  "_comment": "Merge into openclaw.json. Replace all REPLACE_* tokens. Enable companion plugins separately. Note: k8s-debug skill is provided by OpenClaw install, not this bundle.",
   "browser": {
     "ssrfPolicy": {
       "dangerouslyAllowPrivateNetwork": true
