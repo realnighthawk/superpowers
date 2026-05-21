@@ -52,7 +52,8 @@
         "model": "google/gemini-3-flash-preview",
         "skills": [
           "gog", "zuzu-personal", "discord", "discord-post",
-          "calendar-block", "gmail-action", "memory-search", "web-search", "summarize"
+          "calendar-block", "gmail-action", "audio-transcribe", "tts-respond",
+          "memory-search", "web-search", "summarize"
         ],
         "tools": {
           "profile": "minimal",

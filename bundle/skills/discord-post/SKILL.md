@@ -28,6 +28,20 @@ Read channel IDs from profile `integrations.*ChannelId`. Do not hardcode IDs in 
 }
 ```
 
+## Audio attachment
+
+To send a voice response, attach the file returned by `tts-respond`:
+
+```json
+{
+  "action": "send",
+  "channel": "discord",
+  "to": "channel:<channelId>",
+  "message": "<optional caption>",
+  "attachments": ["<absolute_file_path>"]
+}
+```
+
 ## Splitting long messages
 
 Split at logical section breaks. Send Part 1 / Part 2 in sequence. Never cut mid-sentence.

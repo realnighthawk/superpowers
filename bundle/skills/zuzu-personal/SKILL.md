@@ -39,6 +39,16 @@ Send back once if issues found:
 Revision: fix only — [issue]. Return corrected version.
 ```
 
+## Inbound media
+
+On Discord message with attachment:
+
+- **Audio** (ogg, mp3, wav, m4a, webm): use `audio-transcribe` → treat transcript as the message text, then handle normally.
+- **Image**: pass directly to model — vision is native. Describe or process as requested.
+- **Other**: acknowledge receipt, explain what's supported.
+
+**Voice response**: use `tts-respond` when user explicitly asks for voice, or when the inbound message was audio. Attach returned file path via `discord-post`.
+
 ## Tool library
 
 Before multi-step tasks: `memory_search "tool <keyword>"`. If artifact found: execute.
