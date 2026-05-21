@@ -63,13 +63,13 @@
   "sysadmin": {
     "k8sContexts": [],
     "sshHosts": [],
-    "alertChannelId": null
+    "alertChannelId": "REPLACE_DISCORD_SYSADMIN_CHANNEL_ID"
   },
 
   "integrations": {
     "discordFitnessChannelId": "REPLACE_DISCORD_FITNESS_CHANNEL_ID",
-    "discordSysadminChannelId": null,
-    "discordGeneralChannelId": null,
+    "discordSysadminChannelId": "REPLACE_DISCORD_SYSADMIN_CHANNEL_ID",
+    "discordGeneralChannelId": "REPLACE_DISCORD_GENERAL_CHANNEL_ID",
     "googleCalendarId": "REPLACE_GOOGLE_CALENDAR_ID",
     "googleAccount": "REPLACE_GOOGLE_ACCOUNT_EMAIL"
   },
