@@ -31,7 +31,7 @@
     "defaults": {
       "model": { "primary": "google/gemini-3-flash-preview" },
       "imageGenerationModel": {
-        "primary": "gemini-2.5-flash-image",
+        "primary": "google/gemini-2.5-flash-image",
         "timeoutMs": 180000
       },
       "mediaGenerationAutoProviderFallback": false,
