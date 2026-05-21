@@ -19,8 +19,7 @@
     "typecheck": "tsc --noEmit",
     "postinstall": "bash scripts/setup.sh",
     "setup": "bash scripts/setup.sh",
-    "plugin:apply-config": "node scripts/apply-config.js",
-    "preplugin:install-local": "npm run build",
+"preplugin:install-local": "npm run build",
     "plugin:inspect": "openclaw plugins inspect nighthawk-superpowers --runtime",
     "plugin:install-local": "openclaw plugins install . && openclaw plugins enable nighthawk-superpowers"
   },
