@@ -1,36 +1,89 @@
 {
-  "version": 1,
+  "version": 2,
   "userId": "nighthawk",
   "displayName": "nighthawk",
   "discordUserId": "REPLACE_DISCORD_USER_ID",
   "timezone": "America/Los_Angeles",
-  "goals": ["general fitness"],
-  "injuries": [],
-  "equipment": ["bodyweight"],
-  "diet": {
-    "restrictions": [],
-    "calorieTarget": null,
-    "proteinTargetG": null
+
+  "identity": {
+    "name": "Abishek",
+    "goals": ["get fitter", "learn more", "ship more"],
+    "personality": "direct, no fluff"
   },
+
   "fitness": {
+    "goals": ["build muscle", "lose fat"],
+    "injuries": [],
+    "equipment": ["bodyweight"],
     "experience": "beginner",
     "daysPerWeek": 3,
     "preferredSplit": "full_body",
-    "sessionMinutes": 45
+    "sessionMinutes": 45,
+    "diet": {
+      "restrictions": [],
+      "calorieTarget": null,
+      "proteinTargetG": null
+    },
+    "metrics": {
+      "weightKg": null,
+      "heightCm": null,
+      "age": null
+    }
   },
-  "metrics": {
-    "weightKg": null,
-    "heightCm": null,
-    "age": null
+
+  "productivity": {
+    "workStartTime": "09:00",
+    "workEndTime": "18:00",
+    "focusBlockMinutes": 90,
+    "preferredTaskStyle": "time-blocked",
+    "currentProjects": []
   },
+
+  "finance": {
+    "currency": "USD",
+    "monthlyBudget": null,
+    "savingsGoalPct": null,
+    "alertThresholdUSD": null,
+    "expenseLogPath": "finance/expenses.csv"
+  },
+
+  "learning": {
+    "currentTopics": [],
+    "readingListPath": "learning/reading-list.md",
+    "preferredFormat": "articles",
+    "weeklyGoalMinutes": 120
+  },
+
+  "creative": {
+    "journalPath": "creative/journal/",
+    "defaultImageStyle": "illustrative sketch",
+    "writingVoice": "casual, first-person"
+  },
+
+  "sysadmin": {
+    "k8sContexts": [],
+    "sshHosts": [],
+    "alertChannelId": null
+  },
+
   "integrations": {
     "discordFitnessChannelId": "REPLACE_DISCORD_FITNESS_CHANNEL_ID",
+    "discordSysadminChannelId": null,
+    "discordGeneralChannelId": null,
     "googleCalendarId": "REPLACE_GOOGLE_CALENDAR_ID",
     "googleAccount": "REPLACE_GOOGLE_ACCOUNT_EMAIL"
   },
+
   "coaching": {
-    "lastDailyPlanDate": null,
-    "lastDiscordMessageId": null,
-    "checkInHourLocal": 7
+    "fitness": {
+      "lastDailyPlanDate": null,
+      "lastDiscordMessageId": null
+    },
+    "learning": {
+      "lastWeeklyRecommendationDate": null
+    },
+    "finance": {
+      "lastWeeklySummaryDate": null
+    }
   }
 }
