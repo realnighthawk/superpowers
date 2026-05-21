@@ -1,4 +1,14 @@
 {
   "version": 1,
-  "agents": ["zuzu", "sre", "coder", "fitness-coach", "illustrator"]
+  "agents": [
+    "zuzu",
+    "fitness-coach",
+    "productivity-agent",
+    "finance-agent",
+    "creative-agent",
+    "learning-agent",
+    "sysadmin-agent",
+    "social-agent",
+    "home-agent"
+  ]
 }
