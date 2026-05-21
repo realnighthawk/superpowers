@@ -1,3 +1,5 @@
-# TOOLS.md
+# TOOLS.md — Fitness Coach
 
-Personal data and Discord posts: spawn **`zuzu`**. Channel id: `1505834079134683156`.
+- Memory: `memory_search` / `memory_get`
+- Spawn: `sessions_spawn` → `zuzu` only (for Discord + profile updates)
+- Tool scripts: `workspace/tools/`

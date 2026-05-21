@@ -9,7 +9,7 @@ description: Generate a single-day meal plan and macros from user profile (restr
 
 From profile: `diet.restrictions`, `diet.calorieTarget`, `diet.proteinTargetG`, goals, metrics.
 
-## Output format (markdown for Notion)
+## Output format (markdown for Discord chart)
 
 ```markdown
 ## Targets

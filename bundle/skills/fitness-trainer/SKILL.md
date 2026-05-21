@@ -1,28 +1,24 @@
 ---
 name: fitness-trainer
-description: Use for fitness coaching routing, safety, and daily plan workflow. Read first before fitness-workout or fitness-diet.
+description: Core fitness coaching workflow. Read first before fitness-workout or fitness-diet.
 ---
 
 # Fitness trainer (core)
 
-## Workflow
+## Every task
 
-1. Spawn **`zuzu`** for `user_profile_get` when profile may be stale (Zuzu holds nighthawk personal data).
-2. Pick **one** topic skill: `fitness-workout` OR `fitness-diet`.
-3. Produce markdown plans.
-4. Spawn **`zuzu`** (personal ops only) to run **`fitness-discord-post-chart`** + profile updates.
-5. Log generic coaching notes in `memory/YYYY-MM-DD.md`.
+1. `memory_search "tool fitness"` — use existing scripts if found.
+2. Pick one: `fitness-workout` (training request) OR `fitness-diet` (nutrition request).
+3. Produce markdown plan.
+4. Spawn `zuzu` (personal ops only) to post chart and update profile.
 
-## Zuzu handoff template
+## Zuzu spawn template
 
 ```
-Spawn zuzu (personal ops only):
-- user_profile_get if needed
-- fitness-discord-post-chart: date=YYYY-MM-DD, attach workoutMarkdown and dietMarkdown
-- user_profile_update coaching.lastDailyPlanDate=YYYY-MM-DD
-Return confirmation; do not replan fitness.
+Agent: zuzu
+Task: Personal ops only — post fitness chart for <DATE>. Attach workoutMarkdown and/or dietMarkdown. Update coaching.fitness.lastDailyPlanDate=<DATE>. Do not replan.
 ```
 
 ## Safety
 
-Not medical advice. Respect injuries and diet restrictions.
+Not medical advice. Respect injuries and diet restrictions from profile slice.
