@@ -2,28 +2,88 @@
   "version": 1,
   "jobs": [
     {
-      "id": "fitness-daily-checkin",
-      "name": "Fitness daily check-in",
-      "description": "Morning fitness plan + Discord follow-up via fitness-coach agent.",
+      "id": "zuzu-morning-briefing",
+      "name": "Morning briefing",
+      "description": "Zuzu spawns social-agent for digest, posts to #general at 7am.",
       "enabled": true,
-      "agentId": "fitness-coach",
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 7 * * *",
-        "tz": "America/Los_Angeles"
-      },
+      "agentId": "zuzu",
+      "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Daily fitness check-in (America/Los_Angeles). Follow AGENTS.md and HEARTBEAT.md: if coaching.lastDailyPlanDate is not today, build workout + diet, spawn zuzu (personal ops only) to post chart via fitness-discord-post-chart skill, then deliver a short summary. If already planned today, send a brief accountability check-in only.",
+        "message": "Morning briefing. Fetch today's calendar events via gog. Spawn social-agent with calendar data and pending tasks from memory. Vet the digest. Post to integrations.discordGeneralChannelId.",
         "lightContext": true
       },
-      "delivery": {
-        "mode": "announce",
-        "channel": "discord",
-        "to": "channel:REPLACE_DISCORD_FITNESS_CHANNEL_ID"
+      "delivery": { "mode": "silent" },
+      "state": {}
+    },
+    {
+      "id": "fitness-daily-checkin",
+      "name": "Fitness daily check-in",
+      "description": "Fitness coach builds plan if not done today, spawns Zuzu to post to #fitness.",
+      "enabled": true,
+      "agentId": "fitness-coach",
+      "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Daily fitness check-in (America/Los_Angeles). If coaching.fitness.lastDailyPlanDate is not today: build workout + diet plan, spawn zuzu (personal ops only: post fitness-chart, update lastDailyPlanDate). If already planned today: return CHECKIN_DONE.",
+        "lightContext": true
       },
+      "delivery": { "mode": "silent" },
+      "state": {}
+    },
+    {
+      "id": "productivity-weekday-digest",
+      "name": "Weekday productivity digest",
+      "description": "Zuzu fetches calendar, spawns productivity-agent for daily schedule digest Mon–Fri.",
+      "enabled": true,
+      "agentId": "zuzu",
+      "schedule": { "kind": "cron", "expr": "30 8 * * 1-5", "tz": "America/Los_Angeles" },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Weekday digest. Fetch today's calendar events via gog. Spawn productivity-agent with calendar data and pending tasks from memory. Vet result. Post to integrations.discordGeneralChannelId (or #productivity if configured).",
+        "lightContext": true
+      },
+      "delivery": { "mode": "silent" },
+      "state": {}
+    },
+    {
+      "id": "finance-weekly-summary",
+      "name": "Finance weekly summary",
+      "description": "Finance agent reviews spending and alerts every Monday at 9am.",
+      "enabled": true,
+      "agentId": "finance-agent",
+      "schedule": { "kind": "cron", "expr": "0 9 * * 1", "tz": "America/Los_Angeles" },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Weekly finance review. Run budget-review and finance-alert. Spawn zuzu to post summary to Discord. If ALERT_NONE and no notable changes: post summary only.",
+        "lightContext": true
+      },
+      "delivery": { "mode": "silent" },
+      "state": {}
+    },
+    {
+      "id": "learning-weekly-recommendation",
+      "name": "Weekly reading recommendation",
+      "description": "Learning agent surfaces 3–5 new resources every Sunday at 6pm.",
+      "enabled": true,
+      "agentId": "learning-agent",
+      "schedule": { "kind": "cron", "expr": "0 18 * * 0", "tz": "America/Los_Angeles" },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Weekly reading recommendation. Use reading-list skill: find 3–5 new resources on currentTopics via web-search. Add to reading list file. Spawn zuzu to post to Discord.",
+        "lightContext": true
+      },
+      "delivery": { "mode": "silent" },
       "state": {}
     }
   ]
