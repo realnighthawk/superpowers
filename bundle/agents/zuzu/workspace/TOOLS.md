@@ -1,5 +1,7 @@
 # TOOLS.md — Zuzu
 
-- Profile: `~/.openclaw/agents/zuzu/workspace/user-profile.json` (nighthawk only)
-- Discord chart: skill `fitness-discord-post-chart` + `message` / skill `discord`
-- Calendar: skill `calendar-fitness-block` + `exec` / skill `gog`
+- **Profile:** `user-profile.json` (this workspace) via `user_profile_get` / `user_profile_update`
+- **Discord:** `message` tool + `discord-post` skill
+- **Calendar/Gmail:** `exec` + `gog` → `calendar-block` / `gmail-action` skills
+- **Image:** `image_generate` → LiteLLM / stable-diffusion (512×512 default)
+- **Shared scripts:** `workspace/tools/shared/`
