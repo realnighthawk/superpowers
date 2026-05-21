@@ -1,4 +1,4 @@
-# openclaw-nighthawk-superpowers
+# nighthawk-superpowers
 
 Portable OpenClaw plugin that bundles the **Nighthawk multi-agent team**: skills, workspace templates, auth profile templates, profile tools, and an apply CLI.
 
