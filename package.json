@@ -16,9 +16,11 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "setup": "bash scripts/setup.sh",
+    "plugin:apply-config": "node scripts/apply-config.js",
     "preplugin:install-local": "npm run build",
     "plugin:inspect": "openclaw plugins inspect nighthawk-superpowers --runtime",
-    "plugin:install-local": "openclaw plugins install . && openclaw plugins enable nighthawk-superpowers"
+    "plugin:install-local": "openclaw plugins install . && openclaw plugins enable nighthawk-superpowers && npm run setup"
   },
   "openclaw": {
     "extensions": ["./index.ts"],
