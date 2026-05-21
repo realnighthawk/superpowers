@@ -2,7 +2,6 @@
 node_modules/
 
 # TypeScript build
-dist/
 *.tsbuildinfo
 
 # Secrets and local env (never commit API keys)
