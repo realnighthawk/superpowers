@@ -7,7 +7,7 @@ description: Generate images and sketches from text descriptions using image_gen
 
 ## Default
 
-`image_generate`: model `openai/stable-diffusion`, size `512x512`, count `1`.
+`image_generate`: size `512x512`, count `1` (model from gateway config).
 Use `creative.defaultImageStyle` from profile if style not specified.
 
 ## Workflow

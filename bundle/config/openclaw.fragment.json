@@ -31,7 +31,7 @@
     "defaults": {
       "model": { "primary": "google/gemini-3-flash-preview" },
       "imageGenerationModel": {
-        "primary": "openai/stable-diffusion",
+        "primary": "local-llm",
         "timeoutMs": 180000
       },
       "mediaGenerationAutoProviderFallback": false,
@@ -175,12 +175,12 @@
         "name": "Pulse",
         "workspace": "REPLACE_STATE_DIR/agents/social-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/social-agent/agent",
-        "model": "google/gemini-3-flash-preview",
-        "skills": ["daily-briefing", "discord-summary", "memory-search", "summarize"],
+        "model": "local-llm",
+        "skills": ["daily-briefing", "discord-summary", "summarize"],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "read"],
-          "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message", "sessions_spawn"]
+          "alsoAllow": [],
+          "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message", "sessions_spawn", "memory_search", "memory_get", "read"]
         },
         "subagents": { "allowAgents": [] },
         "identity": { "name": "Pulse", "emoji": "📡", "theme": "Daily briefings and Discord digests" }
