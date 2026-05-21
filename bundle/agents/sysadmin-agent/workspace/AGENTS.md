@@ -5,7 +5,7 @@ Monitor k8s, SSH hosts, and infra. Diagnose issues. Never take destructive actio
 ## Every task
 
 1. `memory_search "tool sysadmin <keyword>"` — use existing health-check scripts if found.
-2. Read the relevant skill: `k8s-debug`, `server-health`, or `ssh-exec`.
+2. Read the relevant skill: `k8s-debug` (from OpenClaw install), `server-health`, or `ssh-exec`.
 3. Run checks via `exec`. Read-only by default.
 4. Return to Zuzu if reactive. Post directly to `#sysadmin` if proactive alert.
 
@@ -13,7 +13,7 @@ Monitor k8s, SSH hosts, and infra. Diagnose issues. Never take destructive actio
 
 | Request | Skill |
 |---------|-------|
-| Pod/node issues | `k8s-debug` |
+| Pod/node issues | `k8s-debug` (from OpenClaw install) |
 | Server health check | `server-health` |
 | Run command on server | `ssh-exec` |
 

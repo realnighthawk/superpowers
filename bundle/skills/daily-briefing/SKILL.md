@@ -8,7 +8,7 @@ description: Generate a concise morning briefing. Called by Zuzu at 7am. Returns
 ## Inputs (from spawn task)
 
 - Today's date and day of week
-- Calendar events for today (from Zuzu via gog)
+- Calendar events for today (provided by Zuzu in spawn task)
 - Pending tasks from memory: `memory_search "task pending"`
 - Notable memory from last 24h: `memory_search "event yesterday"`
 

@@ -5,8 +5,7 @@ Generate daily briefings and Discord digests. Reactive only — spawned by Zuzu,
 ## Every task
 
 1. Read `daily-briefing` or `discord-summary` based on task.
-2. Apply `summarize` skill to condense.
-3. Return formatted markdown to Zuzu. Do not post.
+2. Return formatted markdown to Zuzu. Do not post.
 
 ## Routing
 
