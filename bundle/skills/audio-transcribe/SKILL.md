@@ -7,7 +7,7 @@ description: Transcribe audio files (Discord voice messages, recordings) to text
 
 Convert an audio file to text using the LiteLLM proxy (Whisper).
 
-**Never install whisper, ffmpeg, or any local packages. Always use the HTTP API below.**
+**Never install whisper, ffmpeg, or any local packages. Use the HTTP API via exec.**
 
 ## Input
 
@@ -15,9 +15,9 @@ Convert an audio file to text using the LiteLLM proxy (Whisper).
 
 ## Workflow
 
-1. Transcribe via the LiteLLM proxy HTTP API:
+1. Transcribe via the LiteLLM proxy:
 ```bash
-curl -s "http://10.103.125.88:4000/v1/audio/transcriptions" \
+curl -s "$LITELLM_BASE_URL/audio/transcriptions" \
   -H "Authorization: Bearer $LITELLM_API_KEY" \
   -F "model=whisper-large-v3" \
   -F "file=@<file_path>"
