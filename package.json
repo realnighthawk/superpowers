@@ -1,6 +1,6 @@
 {
   "name": "nighthawk-superpowers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Portable OpenClaw bundle: multi-agent team, skills, auth templates, profile tools, and apply CLI",
   "type": "module",
   "license": "MIT",
