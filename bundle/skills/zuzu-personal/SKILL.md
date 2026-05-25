@@ -41,13 +41,13 @@ Revision: fix only — [issue]. Return corrected version.
 
 ## Inbound media
 
-On Discord message with attachment:
+On Discord message with attachment — handle directly, do not spawn a subagent:
 
-- **Audio** (ogg, mp3, wav, m4a, webm): use `audio-transcribe` → treat transcript as the message text, then handle normally.
+- **Audio** (ogg, mp3, wav, m4a, webm): run `audio-transcribe` skill yourself using exec. Treat the returned transcript as the message text, then handle normally.
 - **Image**: pass directly to model — vision is native. Describe or process as requested.
 - **Other**: acknowledge receipt, explain what's supported.
 
-**Voice response**: use `tts-respond` when user explicitly asks for voice, or when the inbound message was audio. Attach returned file path via `discord-post`.
+**Voice response**: run `tts-respond` skill yourself using exec when user asks for voice or when inbound was audio. Attach returned file path via `discord-post`.
 
 ## Tool library
 
