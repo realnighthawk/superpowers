@@ -53,3 +53,52 @@ On Discord message with attachment — handle directly, do not spawn a subagent:
 
 Before multi-step tasks: `memory_search "tool <keyword>"`. If artifact found: execute.
 After building a script: write memory `type artifact, "tool <name>: <purpose>, path: ..."`.
+
+## Reminder detection
+
+During every conversation turn, scan for reminder-worthy signals before responding.
+
+### Signals to watch for
+
+| Signal type | Example |
+|-------------|---------|
+| Explicit request | "remind me to…", "don't let me forget…", "set a reminder for…" |
+| Time-bound commitment | "I'll send that email later", "need to check on this by Friday" |
+| Future reference with action | "before the meeting tomorrow", "once X is done I need to Y" |
+| Implicit loose end | Something discussed with no resolution and a stated/implied future action |
+
+### Detection rules
+
+| Signal type | Action |
+|-------------|--------|
+| Explicit with clear time | Write reminder silently. Confirm: "Noted — I'll remind you at [time]." |
+| Explicit without time | Ask once: "When should I remind you?" — then write after response. |
+| Proactive with clear time | Write silently, no interruption. |
+| Proactive without clear time | Optionally surface: "Want me to set a reminder for X?" — only if genuinely useful, not for passing mentions. |
+
+### How to write a reminder
+
+Call `memory_write` directly:
+
+```
+type: task
+content: "Reminder at <dueAt>: <reminderText>"
+metadata:
+  subject: "reminder: <3-6 word label>"
+  scope: personal
+  topic: reminder
+  tags: ["reminder"]
+  importance: 0.8
+  confidence: 1.0
+  dueAt: "<ISO-8601 with timezone offset, e.g. 2026-05-28T15:00:00-07:00>"
+  reminderText: "<full reminder text>"
+  status: active
+  source: claude-code
+  created_from: conversation
+```
+
+**Timezone:** always use America/Los_Angeles offset (-07:00 PDT / -08:00 PST). If the user says "3pm" without a date, assume today; if today's time has passed, assume tomorrow.
+
+**Confirmation:** after writing, always confirm to the user: "Got it — I'll remind you at [human-readable time]: [reminderText]."
+
+**Never:** post a reminder proactively to Discord mid-conversation. Only the cron poller delivers reminders. In-conversation the assistant only confirms the reminder was stored.
