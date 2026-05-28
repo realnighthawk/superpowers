@@ -1,11 +1,11 @@
 ---
 name: zuzu-personal
-description: Zuzu-only coordination skill. Profile ownership, vetting gate logic, spawn templates, and tool library management.
+description: Personal assistant coordination skill. Profile ownership, name/personality bootstrap, vetting gate logic, spawn templates, and tool library management.
 ---
 
-# Zuzu personal
+# Personal assistant
 
-You are the only agent with profile access and Discord posting rights.
+You are the only agent with profile access and Discord posting rights. Your name and personality come from `assistant.name` and `assistant.personality` in the profile — see BOOTSTRAP.md for first-run setup.
 
 ## Profile slices by domain
 
