@@ -28,6 +28,8 @@ From results, keep only entries where **all** of:
 - `tags` includes `"reminder"`
 - `status` is `"active"` (or absent — default is active)
 
+The **label** for a reminder entry is derived from its `subject` field by stripping the leading `"reminder: "` prefix. Example: subject `"reminder: call dentist friday"` → label `"call dentist friday"`. If the subject field is absent or does not start with `"reminder: "`, use the full subject string as the label.
+
 ### 3. Search for already-delivered reminders
 
 Call `memory_search`:
@@ -35,13 +37,13 @@ Call `memory_search`:
 - filters: `{ "memory_type": "event" }`
 - limit: `100`
 
-Build a set of delivered labels: entries where `tags` includes `"reminder-delivered"`. Extract the short label from each subject (format: `"delivered: <label>"`).
+Build a set of delivered labels: entries where `tags` includes `"reminder-delivered"`. Extract the label from each subject by stripping the leading `"delivered: "` prefix. Example: subject `"delivered: call dentist friday"` → label `"call dentist friday"`.
 
 ### 4. For each pending reminder
 
 For each entry from Step 2:
 
-**a. Parse `dueAt`** from metadata. If absent or malformed, skip and continue.
+**a. Parse `dueAt`** from metadata. Expected format: ISO-8601 with explicit timezone offset, e.g. `2026-05-28T15:00:00-07:00`. Convert both `dueAt` and `now` (from Step 1, which is UTC) to comparable timestamps before evaluating `dueAt <= now`. If `dueAt` is absent, not a string, or not parseable as ISO-8601, skip this entry and continue.
 
 **b. Check due:** is `dueAt <= now`? If not, skip.
 
@@ -51,14 +53,14 @@ For each entry from Step 2:
 ```
 ⏰ Reminder: <reminderText from metadata>
 ```
-Use channel from `integrations.discordGeneralChannelId` in the user profile (via `user_profile_get`), or fall back to the default Discord channel.
+To get the channel: call `user_profile_get` (no parameters) → parse the returned JSON → read `integrations.discordGeneralChannelId`. If that field is absent or empty, send the message as a DM to the owner user ID `490874026902683648` (nighthawk) using the Discord DM channel.
 
 **e. Mark delivered** — call `memory_write`:
 ```
 type: event
-content: "Reminder delivered: <same subject as original entry>"
+content: "Reminder delivered: reminder: <label>"
 metadata:
-  subject: "delivered: <same short label>"
+  subject: "delivered: <label derived from original subject>"
   scope: personal
   topic: reminder
   tags: ["reminder-delivered"]
@@ -67,6 +69,8 @@ metadata:
   created_from: observation
   status: active
 ```
+
+The content field should read: "Reminder delivered: reminder: <label>" (i.e., prepend "Reminder delivered: " to the original subject string).
 
 **f. Error handling:**
 - If `message` fails: do NOT write the delivered entry. The reminder will re-fire next cycle.
