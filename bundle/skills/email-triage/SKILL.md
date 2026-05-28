@@ -7,7 +7,7 @@ description: Categorize emails by priority and draft replies for action items. U
 
 ## Inputs (from spawn task)
 
-Email list (sender, subject, snippet, date — from gmail-action via Zuzu).
+Email list (sender, subject, snippet, date — from gmail-action via the assistant).
 Profile: `productivity.currentProjects`.
 
 ## Output format
@@ -29,5 +29,5 @@ Profile: `productivity.currentProjects`.
 
 - Categories: Action / FYI / Ignore
 - Draft replies for Action items only — 2–3 sentences max
-- Do not send emails — return drafts to Zuzu
+- Do not send emails — return drafts to the assistant
 - Flag anything from nighthawk's key contacts as high priority

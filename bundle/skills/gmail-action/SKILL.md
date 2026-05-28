@@ -1,6 +1,6 @@
 ---
 name: gmail-action
-description: Read and send Gmail messages using gog via exec. Zuzu-only. Always confirm before sending.
+description: Read and send Gmail messages using gog via exec. the assistant-only. Always confirm before sending.
 ---
 
 # Gmail action

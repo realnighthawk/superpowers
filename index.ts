@@ -27,7 +27,7 @@ export default definePluginEntry({
         name: "user_profile_get",
         label: "user_profile_get",
         description:
-          "Read the steward user profile from Zuzu workspace (user-profile.json). Zuzu-only; other agents do not use this.",
+          "Read the steward user profile from assistant workspace (user-profile.json). assistant-only; other agents do not use this.",
         parameters: Type.Object({}),
         async execute() {
           const profile = loadProfile(resolveStateDir());
@@ -42,7 +42,7 @@ export default definePluginEntry({
         name: "user_profile_update",
         label: "user_profile_update",
         description:
-          "Merge fields into user-profile.json in Zuzu workspace. Nested objects are deep-merged.",
+          "Merge fields into user-profile.json in assistant workspace. Nested objects are deep-merged.",
         parameters: Type.Object({
           patch: Type.Record(Type.String(), Type.Unknown(), {
             description:
@@ -64,7 +64,7 @@ export default definePluginEntry({
         description:
           "Read the agent config (name, personality) for a given agent. Used by agents to load their user-defined identity on startup.",
         parameters: Type.Object({
-          agentId: Type.String({ description: "Agent ID, e.g. zuzu" }),
+          agentId: Type.String({ description: "Agent ID, e.g. assistant" }),
         }),
         async execute(_id, params: { agentId: string }) {
           const config = loadAgentConfig(resolveStateDir(), params.agentId);
@@ -81,7 +81,7 @@ export default definePluginEntry({
         description:
           "Update the agent config (name, personality) for a given agent. Used during first-run bootstrap to store user-defined identity.",
         parameters: Type.Object({
-          agentId: Type.String({ description: "Agent ID, e.g. zuzu" }),
+          agentId: Type.String({ description: "Agent ID, e.g. assistant" }),
           patch: Type.Object(
             {
               name: Type.Optional(Type.Union([Type.String(), Type.Null()])),

@@ -8,24 +8,25 @@ Based on the [agent-memory](https://github.com/) / OpenClaw plugin scaffold (`de
 
 | Bundle path | Contents |
 |-------------|----------|
-| `bundle/skills/` | `zuzu-personal`, `fitness-*`, `calendar-fitness-block`, `illustrator-generate`, … |
+| `bundle/skills/` | `assistant-personal`, `fitness-*`, `audio-transcribe`, `tts-respond`, … |
 | `bundle/agents/*/workspace/` | `AGENTS.md`, `SOUL.md`, `TOOLS.md`, … per agent |
-| `bundle/agents/zuzu/workspace/user-profile.example.json` | Profile seed (no secrets) |
+| `bundle/agents/assistant/workspace/user-profile.example.json` | Profile seed (no secrets) |
 | `bundle/auth/auth-profiles.template.json` | `google:free` → `GEMINI_API_KEY`, `google:paid` → `GEMINI_API_KEY_PAID`, LiteLLM for `openai` |
-| `bundle/cron/jobs.template.json` | Fitness daily check-in (edit Discord channel id) |
+| `bundle/cron/jobs.template.json` | Scheduled cron jobs (edit Discord channel ids) |
 | `bundle/config/openclaw.fragment.json` | Merge into `openclaw.json` (agents, auth order, bindings, plugins) |
 | `bundle/config/env.example` | Environment variable checklist |
 
 Runtime (plugin code):
 
-- **`user_profile_get` / `user_profile_update`** — Zuzu workspace profile (replaces standalone `nighthawk-profile` plugin)
+- **`user_profile_get` / `user_profile_update`** — assistant workspace profile
+- **`agent_config_get` / `agent_config_set`** — per-agent identity (name, personality) stored in `agent-config.json`
 - **`openclaw nighthawk-superpowers apply`** — copies workspaces + seeds auth/cron/profile
 
 ## Requirements
 
 - OpenClaw **2026.5.12+**
 - Companion plugins (enable in fragment or your config): `discord`, `google`, `openai`, `memory-core`, `lossless-claw`
-- Bundled skills: `gog`, `discord`, `k8s-debug`, `taskflow` come from OpenClaw / your install (not in this repo)
+- Bundled skills: `gog`, `discord`, `k8s-debug` come from OpenClaw / your install (not in this repo)
 
 ## Install
 
@@ -53,16 +54,16 @@ openclaw nighthawk-superpowers apply --force
 3. **Merge config** — edit `bundle/config/openclaw.fragment.json`:
 
    - Replace every `REPLACE_STATE_DIR` with your state directory (e.g. `/home/you/.openclaw`).
-   - Replace `REPLACE_DISCORD_USER_ID` and cron channel `REPLACE_DISCORD_FITNESS_CHANNEL_ID`.
+   - Replace `REPLACE_DISCORD_USER_ID` and cron channel ids.
    - Merge the JSON into `~/.openclaw/openclaw.json` (jq/manual; `_comment` key can be removed).
 
 4. **Environment** — copy `bundle/config/env.example` → `~/.openclaw/.env` and set keys.
 
-5. **Edit profile** — `~/.openclaw/agents/zuzu/workspace/user-profile.json` (created from example if missing).
+5. **Edit profile** — `~/.openclaw/agents/assistant/workspace/user-profile.json` (created from example if missing).
 
-6. **LiteLLM / private network** — if using LAN LiteLLM for `openai/stable-diffusion`, keep `browser.ssrfPolicy.dangerouslyAllowPrivateNetwork` from the fragment and configure `models.providers.openai` in your main config.
+6. **LiteLLM / private network** — if using LAN LiteLLM, keep `browser.ssrfPolicy.dangerouslyAllowPrivateNetwork` from the fragment and configure your `LITELLM_BASE_URL` / `LITELLM_API_KEY` env vars.
 
-7. **Restart gateway** and test Discord → Zuzu.
+7. **Restart gateway** — on first Discord message the assistant will ask for its name and personality.
 
 ## CLI
 
@@ -75,11 +76,14 @@ openclaw nighthawk-superpowers paths
 
 | ID | Role |
 |----|------|
-| `zuzu` | Default Discord steward, profile tools, spawns specialists |
-| `sre` | K8s / infra (`k8s-debug`, `taskflow`) |
-| `coder` | Coding (`taskflow`) |
-| `fitness-coach` | Workout/diet; spawns Zuzu for Discord/calendar |
-| `illustrator` | `image_generate` sketches; Zuzu delivers to Discord |
+| `assistant` | Default Discord steward, profile tools, spawns specialists |
+| `fitness-coach` | Workout/diet; spawns assistant for Discord/calendar |
+| `productivity-agent` | Calendar, email, task planning |
+| `finance-agent` | Expense tracking and budget management |
+| `creative-agent` | Image generation, journaling, writing |
+| `learning-agent` | Study plans, content summarization, reading lists |
+| `sysadmin-agent` | k8s, server monitoring, SSH administration |
+| `social-agent` | Daily briefings and Discord digests (local-llm) |
 
 ## Development
 

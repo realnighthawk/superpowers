@@ -7,7 +7,7 @@ description: Analyze today's or this week's calendar and flag conflicts or optim
 
 ## Inputs (from spawn task)
 
-Calendar events list (fetched by Zuzu via gog).
+Calendar events list (fetched by the assistant via gog).
 Profile: `workStartTime`, `workEndTime`, `focusBlockMinutes`.
 
 ## Output format

@@ -24,7 +24,7 @@ description: Write or append a journal entry. Use when the user wants to log tho
 
 1. Read existing entry for today if it exists (do not overwrite — append).
 2. Write updated file.
-3. Return confirmation + entry path to Zuzu.
+3. Return confirmation + entry path to the assistant.
 
 ## Rules
 

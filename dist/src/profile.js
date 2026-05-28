@@ -25,7 +25,7 @@ export const DEFAULT_PROFILE = {
     coaching: { lastDailyPlanDate: null, lastDiscordMessageId: null, checkInHourLocal: 7 },
 };
 export function resolveProfilePath(stateDir) {
-    return path.join(stateDir, "agents", "zuzu", "workspace", "user-profile.json");
+    return path.join(stateDir, "agents", "assistant", "workspace", "user-profile.json");
 }
 function deepMerge(base, patch) {
     const out = { ...base };

@@ -10,12 +10,12 @@ description: Core fitness coaching workflow. Read first before fitness-workout o
 1. `memory_search "tool fitness"` — use existing scripts if found.
 2. Pick one: `fitness-workout` (training request) OR `fitness-diet` (nutrition request).
 3. Produce markdown plan.
-4. Spawn `zuzu` (personal ops only) to post chart and update profile.
+4. Spawn `assistant` (personal ops only) to post chart and update profile.
 
-## Zuzu spawn template
+## the assistant spawn template
 
 ```
-Agent: zuzu
+Agent: assistant
 Task: Personal ops only — post fitness chart for <DATE>. Attach workoutMarkdown and/or dietMarkdown. Update coaching.fitness.lastDailyPlanDate=<DATE>. Do not replan.
 ```
 

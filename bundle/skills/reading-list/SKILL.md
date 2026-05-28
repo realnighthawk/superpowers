@@ -22,7 +22,7 @@ Append:
 1. `web-search` for top articles on `currentTopics`.
 2. Pick 3–5 items not already in the list (check for duplicates first).
 3. Add to file.
-4. Return formatted list to Zuzu.
+4. Return formatted list to the assistant.
 
 ## Review
 

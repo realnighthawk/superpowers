@@ -28,6 +28,6 @@ echo "$OUT"
 
 ## Rules
 
-- Zuzu attaches the returned path via `discord-post` file attachment
+- the assistant attaches the returned path via `discord-post` file attachment
 - Do not TTS raw data, lists, or code — convert to natural spoken language first
 - `LITELLM_BASE_URL` is set in the environment by OpenClaw's LiteLLM configuration

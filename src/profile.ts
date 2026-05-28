@@ -66,7 +66,7 @@ export const DEFAULT_PROFILE: UserProfile = {
 };
 
 export function resolveProfilePath(stateDir: string): string {
-  return path.join(stateDir, "agents", "zuzu", "workspace", "user-profile.json");
+  return path.join(stateDir, "agents", "assistant", "workspace", "user-profile.json");
 }
 
 function deepMerge(

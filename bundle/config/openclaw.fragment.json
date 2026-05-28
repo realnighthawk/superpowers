@@ -44,14 +44,14 @@
     },
     "list": [
       {
-        "id": "zuzu",
+        "id": "assistant",
         "default": true,
-        "name": "Zuzu",
-        "workspace": "REPLACE_STATE_DIR/agents/zuzu/workspace",
-        "agentDir": "REPLACE_STATE_DIR/agents/zuzu/agent",
+        "name": "Assistant",
+        "workspace": "REPLACE_STATE_DIR/agents/assistant/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/assistant/agent",
         "model": "google/gemini-3-flash-preview",
         "skills": [
-          "gog", "zuzu-personal", "discord", "discord-post",
+          "gog", "assistant-personal", "discord", "discord-post",
           "calendar-block", "gmail-action", "audio-transcribe", "tts-respond",
           "memory-search", "web-search", "summarize"
         ],
@@ -68,12 +68,12 @@
         },
         "subagents": {
           "allowAgents": [
-            "zuzu", "fitness-coach", "productivity-agent", "finance-agent",
+            "assistant", "fitness-coach", "productivity-agent", "finance-agent",
             "creative-agent", "learning-agent", "sysadmin-agent", "social-agent"
           ],
           "delegationMode": "prefer"
         },
-        "identity": { "name": "Zuzu", "emoji": "🦉", "theme": "Personal coordinator and Discord steward" }
+        "identity": { "name": "Assistant", "emoji": "🦉", "theme": "Personal coordinator and Discord steward" }
       },
       {
         "id": "fitness-coach",
@@ -90,7 +90,7 @@
           "alsoAllow": ["memory_search", "memory_get", "sessions_spawn", "sessions_list", "session_status"],
           "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
         },
-        "subagents": { "allowAgents": ["zuzu"], "delegationMode": "prefer" },
+        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
         "heartbeat": { "every": "8h", "lightContext": true },
         "identity": { "name": "Fitness Coach", "emoji": "💪", "theme": "Workout and nutrition coaching" }
       },
@@ -106,7 +106,7 @@
           "alsoAllow": ["memory_search", "memory_get", "sessions_spawn", "sessions_list", "session_status"],
           "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
         },
-        "subagents": { "allowAgents": ["zuzu"], "delegationMode": "prefer" },
+        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
         "identity": { "name": "Compass", "emoji": "🧭", "theme": "Calendar, email, and task planning" }
       },
       {
@@ -121,7 +121,7 @@
           "alsoAllow": ["memory_search", "memory_get", "read", "write", "sessions_spawn", "sessions_list", "session_status"],
           "deny": ["browser", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
         },
-        "subagents": { "allowAgents": ["zuzu"], "delegationMode": "prefer" },
+        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
         "identity": { "name": "Ledger", "emoji": "📊", "theme": "Expense tracking and budget management" }
       },
       {
@@ -136,7 +136,7 @@
           "alsoAllow": ["memory_search", "memory_get", "image_generate", "image", "read", "write", "sessions_spawn", "session_status"],
           "deny": ["browser", "exec", "user_profile_get", "user_profile_update", "message"]
         },
-        "subagents": { "allowAgents": ["zuzu"] },
+        "subagents": { "allowAgents": ["assistant"] },
         "identity": { "name": "Canvas", "emoji": "🎨", "theme": "Image generation, journaling, and writing" }
       },
       {
@@ -152,7 +152,7 @@
           "deny": ["browser", "edit", "apply_patch", "user_profile_get", "user_profile_update", "message"],
           "exec": { "security": "allowlist", "ask": "on-miss" }
         },
-        "subagents": { "allowAgents": ["zuzu", "learning-agent"], "delegationMode": "prefer" },
+        "subagents": { "allowAgents": ["assistant", "learning-agent"], "delegationMode": "prefer" },
         "identity": { "name": "Sage", "emoji": "📚", "theme": "Study plans, content summarization, reading lists" }
       },
       {
@@ -168,7 +168,7 @@
           "deny": ["browser", "user_profile_get", "user_profile_update"],
           "exec": { "security": "allowlist", "ask": "always" }
         },
-        "subagents": { "allowAgents": ["zuzu"], "delegationMode": "prefer" },
+        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
         "heartbeat": { "every": "6h", "lightContext": true },
         "identity": { "name": "Ops", "emoji": "⚙️", "theme": "k8s, server monitoring, SSH administration" }
       },
@@ -201,7 +201,7 @@
     ]
   },
   "bindings": [
-    { "agentId": "zuzu", "match": { "channel": "discord" } }
+    { "agentId": "assistant", "match": { "channel": "discord" } }
   ],
   "plugins": {
     "allow": [

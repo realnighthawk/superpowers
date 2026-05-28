@@ -25,5 +25,5 @@ Use `creative.defaultImageStyle` from profile if style not specified.
 
 ## Rules
 
-- Return absolute file paths so Zuzu can attach to Discord
+- Return absolute file paths so the assistant can attach to Discord
 - Do not use exec/browser to find stock images when task says **create**

@@ -27,6 +27,6 @@ Issues:
 
 ## Rules
 
-- Return `ALERT_NONE` for clean runs — Zuzu will stay silent
+- Return `ALERT_NONE` for clean runs — the assistant will stay silent
 - If `alertThresholdUSD` is null: skip large-expense check
 - If `monthlyBudget` is null: skip over-budget check

@@ -1,6 +1,6 @@
 ---
 name: fitness-chart
-description: Format a daily fitness chart message for Discord. Prepare the body and pass to discord-post via message. Zuzu-only.
+description: Format a daily fitness chart message for Discord. Prepare the body and pass to discord-post via message. the assistant-only.
 ---
 
 # Fitness chart

@@ -1,6 +1,6 @@
 ---
 name: calendar-block
-description: Create or list Google Calendar events using gog via exec. Zuzu-only. Use for any calendar action.
+description: Create or list Google Calendar events using gog via exec. the assistant-only. Use for any calendar action.
 ---
 
 # Calendar block

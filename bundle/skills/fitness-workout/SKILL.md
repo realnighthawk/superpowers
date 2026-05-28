@@ -7,7 +7,7 @@ description: Generate a single-day workout plan from user profile (equipment, in
 
 ## Inputs
 
-From profile slice passed in spawn task by Zuzu: goals, injuries, equipment, `fitness.experience`, `fitness.preferredSplit`, `fitness.sessionMinutes`.
+From profile slice passed in spawn task by the assistant: goals, injuries, equipment, `fitness.experience`, `fitness.preferredSplit`, `fitness.sessionMinutes`.
 
 ## Output format (markdown for Discord chart)
 

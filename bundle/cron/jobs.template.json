@@ -2,11 +2,11 @@
   "version": 1,
   "jobs": [
     {
-      "id": "zuzu-morning-briefing",
+      "id": "assistant-morning-briefing",
       "name": "Morning briefing",
-      "description": "Zuzu spawns social-agent for digest, posts to #general at 7am.",
+      "description": "Assistant spawns social-agent for digest, posts to #general at 7am.",
       "enabled": true,
-      "agentId": "zuzu",
+      "agentId": "assistant",
       "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
       "sessionTarget": "isolated",
       "wakeMode": "now",
@@ -21,7 +21,7 @@
     {
       "id": "fitness-daily-checkin",
       "name": "Fitness daily check-in",
-      "description": "Fitness coach builds plan if not done today, spawns Zuzu to post to #fitness.",
+      "description": "Fitness coach builds plan if not done today, spawns assistant to post to #fitness.",
       "enabled": true,
       "agentId": "fitness-coach",
       "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
@@ -29,7 +29,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Daily fitness check-in (America/Los_Angeles). If coaching.fitness.lastDailyPlanDate is not today: build workout + diet plan, spawn zuzu (personal ops only: post fitness-chart, update lastDailyPlanDate). If already planned today: return CHECKIN_DONE.",
+        "message": "Daily fitness check-in (America/Los_Angeles). If coaching.fitness.lastDailyPlanDate is not today: build workout + diet plan, spawn assistant (personal ops only: post fitness-chart, update lastDailyPlanDate). If already planned today: return CHECKIN_DONE.",
         "lightContext": true
       },
       "delivery": { "mode": "silent" },
@@ -38,9 +38,9 @@
     {
       "id": "productivity-weekday-digest",
       "name": "Weekday productivity digest",
-      "description": "Zuzu fetches calendar, spawns productivity-agent for daily schedule digest Mon–Fri.",
+      "description": "Assistant fetches calendar, spawns productivity-agent for daily schedule digest Mon–Fri.",
       "enabled": true,
-      "agentId": "zuzu",
+      "agentId": "assistant",
       "schedule": { "kind": "cron", "expr": "30 8 * * 1-5", "tz": "America/Los_Angeles" },
       "sessionTarget": "isolated",
       "wakeMode": "now",
@@ -63,7 +63,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Weekly finance review. Run budget-review and finance-alert. Spawn zuzu to post summary to Discord. If ALERT_NONE and no notable changes: post summary only.",
+        "message": "Weekly finance review. Run budget-review and finance-alert. Spawn assistant to post summary to Discord. If ALERT_NONE and no notable changes: post summary only.",
         "lightContext": true
       },
       "delivery": { "mode": "silent" },
@@ -80,7 +80,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Weekly reading recommendation. Use reading-list skill: find 3–5 new resources on currentTopics via web-search. Add to reading list file. Spawn zuzu to post to Discord.",
+        "message": "Weekly reading recommendation. Use reading-list skill: find 3–5 new resources on currentTopics via web-search. Add to reading list file. Spawn assistant to post to Discord.",
         "lightContext": true
       },
       "delivery": { "mode": "silent" },

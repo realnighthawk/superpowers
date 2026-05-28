@@ -1,6 +1,6 @@
 ---
 name: ssh-exec
-description: Execute commands on remote servers via SSH safely. Read-only by default; confirm writes with Zuzu first.
+description: Execute commands on remote servers via SSH safely. Read-only by default; confirm writes with the assistant first.
 ---
 
 # SSH exec
@@ -8,7 +8,7 @@ description: Execute commands on remote servers via SSH safely. Read-only by def
 ## Safety
 
 - Read-only commands (logs, status) run without confirmation
-- Write operations (restart, stop, delete) require Zuzu confirmation before running
+- Write operations (restart, stop, delete) require the assistant confirmation before running
 - Never store credentials in commands or memory
 
 ## Read-only examples

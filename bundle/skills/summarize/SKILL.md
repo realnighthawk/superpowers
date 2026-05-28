@@ -12,7 +12,7 @@ description: Condense long content into key points. Apply before posting to Disc
 - No markdown tables
 - Plain bullet lists only
 
-## For spawn task handoff to Zuzu
+## For spawn task handoff to the assistant
 
 - 3–5 sentences
 - State: what was found, why it matters, suggested action

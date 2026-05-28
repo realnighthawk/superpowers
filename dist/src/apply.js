@@ -73,8 +73,8 @@ function seedAuthProfiles(stateDir, agentIds, force, log) {
     }
 }
 function seedUserProfile(stateDir, force, log) {
-    const example = bundlePath("agents", "zuzu", "workspace", "user-profile.example.json");
-    const dest = path.join(stateDir, "agents", "zuzu", "workspace", "user-profile.json");
+    const example = bundlePath("agents", "assistant", "workspace", "user-profile.example.json");
+    const dest = path.join(stateDir, "agents", "assistant", "workspace", "user-profile.json");
     if (!fs.existsSync(example)) {
         log.notes.push("No user-profile.example.json in bundle; skip profile seed.");
         return;

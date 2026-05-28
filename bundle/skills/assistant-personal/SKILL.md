@@ -1,5 +1,5 @@
 ---
-name: zuzu-personal
+name: assistant-personal
 description: Personal assistant coordination skill. Profile ownership, name/personality bootstrap, vetting gate logic, spawn templates, and tool library management.
 ---
 

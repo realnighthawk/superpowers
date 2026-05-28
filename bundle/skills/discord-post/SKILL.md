@@ -1,6 +1,6 @@
 ---
 name: discord-post
-description: Post formatted messages to Discord via the message tool. Zuzu-only. Covers channel routing, formatting, and size limits.
+description: Post formatted messages to Discord via the message tool. the assistant-only. Covers channel routing, formatting, and size limits.
 ---
 
 # Discord post
