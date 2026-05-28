@@ -10,26 +10,43 @@
       "google:free": {
         "type": "api_key",
         "provider": "google",
-        "keyRef": { "source": "env", "provider": "default", "id": "GEMINI_API_KEY" }
+        "keyRef": {
+          "source": "env",
+          "provider": "default",
+          "id": "GEMINI_API_KEY"
+        }
       },
       "google:paid": {
         "type": "api_key",
         "provider": "google",
-        "keyRef": { "source": "env", "provider": "default", "id": "GEMINI_API_KEY_PAID" }
+        "keyRef": {
+          "source": "env",
+          "provider": "default",
+          "id": "GEMINI_API_KEY_PAID"
+        }
       },
       "openai:default": {
         "type": "api_key",
         "provider": "openai",
-        "keyRef": { "source": "env", "provider": "default", "id": "LITELLM_API_KEY" }
+        "keyRef": {
+          "source": "env",
+          "provider": "default",
+          "id": "LITELLM_API_KEY"
+        }
       }
     },
     "order": {
-      "google": ["google:free", "google:paid"]
+      "google": [
+        "google:free",
+        "google:paid"
+      ]
     }
   },
   "agents": {
     "defaults": {
-      "model": { "primary": "google/gemini-3-flash-preview" },
+      "model": {
+        "primary": "google/gemini-3-flash-preview"
+      },
       "imageGenerationModel": {
         "primary": "google/gemini-2.5-flash-image",
         "timeoutMs": 180000
@@ -51,29 +68,68 @@
         "agentDir": "REPLACE_STATE_DIR/agents/assistant/agent",
         "model": "google/gemini-3-flash-preview",
         "skills": [
-          "gog", "assistant-personal", "discord", "discord-post",
-          "calendar-block", "gmail-action", "audio-transcribe", "tts-respond",
-          "memory-search", "web-search", "summarize"
+          "gog",
+          "assistant-personal",
+          "discord",
+          "discord-post",
+          "calendar-block",
+          "gmail-action",
+          "audio-transcribe",
+          "tts-respond",
+          "memory-search",
+          "web-search",
+          "summarize",
+          "reminder-check"
         ],
         "tools": {
           "profile": "minimal",
           "alsoAllow": [
-            "memory_search", "memory_get", "sessions_spawn", "sessions_list",
-            "agents_list", "session_status", "user_profile_get", "user_profile_update",
-            "agent_config_get", "agent_config_set",
-            "message", "exec", "process", "image_generate", "image"
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "sessions_list",
+            "agents_list",
+            "session_status",
+            "user_profile_get",
+            "user_profile_update",
+            "agent_config_get",
+            "agent_config_set",
+            "message",
+            "exec",
+            "process",
+            "image_generate",
+            "image",
+            "memory_write"
           ],
-          "deny": ["write", "edit", "apply_patch", "browser"],
-          "exec": { "security": "allowlist", "ask": "on-miss" }
+          "deny": [
+            "write",
+            "edit",
+            "apply_patch",
+            "browser"
+          ],
+          "exec": {
+            "security": "allowlist",
+            "ask": "on-miss"
+          }
         },
         "subagents": {
           "allowAgents": [
-            "assistant", "fitness-coach", "productivity-agent", "finance-agent",
-            "creative-agent", "learning-agent", "sysadmin-agent", "social-agent"
+            "assistant",
+            "fitness-coach",
+            "productivity-agent",
+            "finance-agent",
+            "creative-agent",
+            "learning-agent",
+            "sysadmin-agent",
+            "social-agent"
           ],
           "delegationMode": "prefer"
         },
-        "identity": { "name": "Assistant", "emoji": "🦉", "theme": "Personal coordinator and Discord steward" }
+        "identity": {
+          "name": "Assistant",
+          "emoji": "\ud83e\udd89",
+          "theme": "Personal coordinator and Discord steward"
+        }
       },
       {
         "id": "fitness-coach",
@@ -82,17 +138,48 @@
         "agentDir": "REPLACE_STATE_DIR/agents/fitness-coach/agent",
         "model": "google/gemini-3-flash-preview",
         "skills": [
-          "fitness-trainer", "fitness-workout", "fitness-diet", "fitness-chart",
-          "memory-search", "summarize"
+          "fitness-trainer",
+          "fitness-workout",
+          "fitness-diet",
+          "fitness-chart",
+          "memory-search",
+          "summarize"
         ],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "sessions_spawn", "sessions_list", "session_status"],
-          "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "sessions_list",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ]
         },
-        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
-        "heartbeat": { "every": "8h", "lightContext": true },
-        "identity": { "name": "Fitness Coach", "emoji": "💪", "theme": "Workout and nutrition coaching" }
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ],
+          "delegationMode": "prefer"
+        },
+        "heartbeat": {
+          "every": "8h",
+          "lightContext": true
+        },
+        "identity": {
+          "name": "Fitness Coach",
+          "emoji": "\ud83d\udcaa",
+          "theme": "Workout and nutrition coaching"
+        }
       },
       {
         "id": "productivity-agent",
@@ -100,14 +187,44 @@
         "workspace": "REPLACE_STATE_DIR/agents/productivity-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/productivity-agent/agent",
         "model": "google/gemini-3-flash-preview",
-        "skills": ["task-plan", "email-triage", "calendar-review", "memory-search", "summarize"],
+        "skills": [
+          "task-plan",
+          "email-triage",
+          "calendar-review",
+          "memory-search",
+          "summarize"
+        ],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "sessions_spawn", "sessions_list", "session_status"],
-          "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "sessions_spawn",
+            "sessions_list",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ]
         },
-        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
-        "identity": { "name": "Compass", "emoji": "🧭", "theme": "Calendar, email, and task planning" }
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ],
+          "delegationMode": "prefer"
+        },
+        "identity": {
+          "name": "Compass",
+          "emoji": "\ud83e\udded",
+          "theme": "Calendar, email, and task planning"
+        }
       },
       {
         "id": "finance-agent",
@@ -115,14 +232,44 @@
         "workspace": "REPLACE_STATE_DIR/agents/finance-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/finance-agent/agent",
         "model": "google/gemini-3-flash-preview",
-        "skills": ["expense-log", "budget-review", "finance-alert", "memory-search"],
+        "skills": [
+          "expense-log",
+          "budget-review",
+          "finance-alert",
+          "memory-search"
+        ],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "read", "write", "sessions_spawn", "sessions_list", "session_status"],
-          "deny": ["browser", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message"]
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "read",
+            "write",
+            "sessions_spawn",
+            "sessions_list",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ]
         },
-        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
-        "identity": { "name": "Ledger", "emoji": "📊", "theme": "Expense tracking and budget management" }
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ],
+          "delegationMode": "prefer"
+        },
+        "identity": {
+          "name": "Ledger",
+          "emoji": "\ud83d\udcca",
+          "theme": "Expense tracking and budget management"
+        }
       },
       {
         "id": "creative-agent",
@@ -130,14 +277,42 @@
         "workspace": "REPLACE_STATE_DIR/agents/creative-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/creative-agent/agent",
         "model": "google/gemini-3.1-pro-preview",
-        "skills": ["image-generate", "journal-write", "writing-assist", "memory-search"],
+        "skills": [
+          "image-generate",
+          "journal-write",
+          "writing-assist",
+          "memory-search"
+        ],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "image_generate", "image", "read", "write", "sessions_spawn", "session_status"],
-          "deny": ["browser", "exec", "user_profile_get", "user_profile_update", "message"]
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "image_generate",
+            "image",
+            "read",
+            "write",
+            "sessions_spawn",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ]
         },
-        "subagents": { "allowAgents": ["assistant"] },
-        "identity": { "name": "Canvas", "emoji": "🎨", "theme": "Image generation, journaling, and writing" }
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ]
+        },
+        "identity": {
+          "name": "Canvas",
+          "emoji": "\ud83c\udfa8",
+          "theme": "Image generation, journaling, and writing"
+        }
       },
       {
         "id": "learning-agent",
@@ -145,15 +320,50 @@
         "workspace": "REPLACE_STATE_DIR/agents/learning-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/learning-agent/agent",
         "model": "google/gemini-3.1-pro-preview",
-        "skills": ["study-plan", "content-summarize", "reading-list", "memory-search", "web-search", "summarize"],
+        "skills": [
+          "study-plan",
+          "content-summarize",
+          "reading-list",
+          "memory-search",
+          "web-search",
+          "summarize"
+        ],
         "tools": {
           "profile": "minimal",
-          "alsoAllow": ["memory_search", "memory_get", "read", "write", "exec", "sessions_spawn", "session_status"],
-          "deny": ["browser", "edit", "apply_patch", "user_profile_get", "user_profile_update", "message"],
-          "exec": { "security": "allowlist", "ask": "on-miss" }
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "read",
+            "write",
+            "exec",
+            "sessions_spawn",
+            "session_status"
+          ],
+          "deny": [
+            "browser",
+            "edit",
+            "apply_patch",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ],
+          "exec": {
+            "security": "allowlist",
+            "ask": "on-miss"
+          }
         },
-        "subagents": { "allowAgents": ["assistant", "learning-agent"], "delegationMode": "prefer" },
-        "identity": { "name": "Sage", "emoji": "📚", "theme": "Study plans, content summarization, reading lists" }
+        "subagents": {
+          "allowAgents": [
+            "assistant",
+            "learning-agent"
+          ],
+          "delegationMode": "prefer"
+        },
+        "identity": {
+          "name": "Sage",
+          "emoji": "\ud83d\udcda",
+          "theme": "Study plans, content summarization, reading lists"
+        }
       },
       {
         "id": "sysadmin-agent",
@@ -161,16 +371,49 @@
         "workspace": "REPLACE_STATE_DIR/agents/sysadmin-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/sysadmin-agent/agent",
         "model": "google/gemini-3.1-pro-preview",
-        "skills": ["k8s-debug", "server-health", "ssh-exec", "memory-search"],
+        "skills": [
+          "k8s-debug",
+          "server-health",
+          "ssh-exec",
+          "memory-search"
+        ],
         "tools": {
           "profile": "coding",
-          "alsoAllow": ["memory_search", "memory_get", "exec", "process", "sessions_spawn", "sessions_list", "session_status", "message"],
-          "deny": ["browser", "user_profile_get", "user_profile_update"],
-          "exec": { "security": "allowlist", "ask": "always" }
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "exec",
+            "process",
+            "sessions_spawn",
+            "sessions_list",
+            "session_status",
+            "message"
+          ],
+          "deny": [
+            "browser",
+            "user_profile_get",
+            "user_profile_update"
+          ],
+          "exec": {
+            "security": "allowlist",
+            "ask": "always"
+          }
         },
-        "subagents": { "allowAgents": ["assistant"], "delegationMode": "prefer" },
-        "heartbeat": { "every": "6h", "lightContext": true },
-        "identity": { "name": "Ops", "emoji": "⚙️", "theme": "k8s, server monitoring, SSH administration" }
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ],
+          "delegationMode": "prefer"
+        },
+        "heartbeat": {
+          "every": "6h",
+          "lightContext": true
+        },
+        "identity": {
+          "name": "Ops",
+          "emoji": "\u2699\ufe0f",
+          "theme": "k8s, server monitoring, SSH administration"
+        }
       },
       {
         "id": "social-agent",
@@ -178,14 +421,37 @@
         "workspace": "REPLACE_STATE_DIR/agents/social-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/social-agent/agent",
         "model": "local-llm",
-        "skills": ["daily-briefing", "discord-summary", "summarize"],
+        "skills": [
+          "daily-briefing",
+          "discord-summary",
+          "summarize"
+        ],
         "tools": {
           "profile": "minimal",
           "alsoAllow": [],
-          "deny": ["browser", "write", "edit", "apply_patch", "exec", "user_profile_get", "user_profile_update", "message", "sessions_spawn", "memory_search", "memory_get", "read"]
+          "deny": [
+            "browser",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message",
+            "sessions_spawn",
+            "memory_search",
+            "memory_get",
+            "read"
+          ]
         },
-        "subagents": { "allowAgents": [] },
-        "identity": { "name": "Pulse", "emoji": "📡", "theme": "Daily briefings and Discord digests" }
+        "subagents": {
+          "allowAgents": []
+        },
+        "identity": {
+          "name": "Pulse",
+          "emoji": "\ud83d\udce1",
+          "theme": "Daily briefings and Discord digests"
+        }
       },
       {
         "id": "home-agent",
@@ -194,25 +460,52 @@
         "workspace": "REPLACE_STATE_DIR/agents/home-agent/workspace",
         "agentDir": "REPLACE_STATE_DIR/agents/home-agent/agent",
         "model": "google/gemini-3-flash-preview",
-        "skills": ["home-placeholder"],
-        "tools": { "profile": "minimal" },
-        "identity": { "name": "Home", "emoji": "🏠", "theme": "Home automation (placeholder, disabled)" }
+        "skills": [
+          "home-placeholder"
+        ],
+        "tools": {
+          "profile": "minimal"
+        },
+        "identity": {
+          "name": "Home",
+          "emoji": "\ud83c\udfe0",
+          "theme": "Home automation (placeholder, disabled)"
+        }
       }
     ]
   },
   "bindings": [
-    { "agentId": "assistant", "match": { "channel": "discord" } }
+    {
+      "agentId": "assistant",
+      "match": {
+        "channel": "discord"
+      }
+    }
   ],
   "plugins": {
     "allow": [
-      "nighthawk-superpowers", "discord", "google", "openai",
-      "memory-core", "lossless-claw", "diagnostics-otel", "youtube-transcripts"
+      "nighthawk-superpowers",
+      "discord",
+      "google",
+      "openai",
+      "memory-core",
+      "lossless-claw",
+      "diagnostics-otel",
+      "youtube-transcripts"
     ],
     "entries": {
-      "nighthawk-superpowers": { "enabled": true },
-      "discord": { "enabled": true },
-      "google": { "enabled": true },
-      "openai": { "enabled": true },
+      "nighthawk-superpowers": {
+        "enabled": true
+      },
+      "discord": {
+        "enabled": true
+      },
+      "google": {
+        "enabled": true
+      },
+      "openai": {
+        "enabled": true
+      },
       "memory-core": {
         "enabled": true,
         "config": {
@@ -223,9 +516,15 @@
           }
         }
       },
-      "lossless-claw": { "enabled": true },
-      "diagnostics-otel": { "enabled": true },
-      "youtube-transcripts": { "enabled": true }
+      "lossless-claw": {
+        "enabled": true
+      },
+      "diagnostics-otel": {
+        "enabled": true
+      },
+      "youtube-transcripts": {
+        "enabled": true
+      }
     },
     "slots": {
       "memory": "memory-core",
@@ -233,6 +532,8 @@
     }
   },
   "commands": {
-    "ownerAllowFrom": ["discord:REPLACE_DISCORD_USER_ID"]
+    "ownerAllowFrom": [
+      "discord:REPLACE_DISCORD_USER_ID"
+    ]
   }
 }
