@@ -2,6 +2,7 @@ import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 import { Type } from "@sinclair/typebox";
 import { applyKit, formatApplyReport } from "./src/apply.js";
 import { loadProfile, updateProfile } from "./src/profile.js";
+import { loadAgentConfig, updateAgentConfig, type AgentConfig } from "./src/agent-config.js";
 import { bundlePath, resolveStateDir } from "./src/paths.js";
 
 type ToolResult = {
@@ -51,6 +52,47 @@ export default definePluginEntry({
         async execute(_id, params: { patch: Record<string, unknown> }) {
           const profile = updateProfile(resolveStateDir(), params.patch);
           return textResult(JSON.stringify({ ok: true, profile }, null, 2), { ok: true, profile });
+        },
+      },
+      optional,
+    );
+
+    api.registerTool(
+      {
+        name: "agent_config_get",
+        label: "agent_config_get",
+        description:
+          "Read the agent config (name, personality) for a given agent. Used by agents to load their user-defined identity on startup.",
+        parameters: Type.Object({
+          agentId: Type.String({ description: "Agent ID, e.g. zuzu" }),
+        }),
+        async execute(_id, params: { agentId: string }) {
+          const config = loadAgentConfig(resolveStateDir(), params.agentId);
+          return textResult(JSON.stringify(config, null, 2), { config });
+        },
+      },
+      optional,
+    );
+
+    api.registerTool(
+      {
+        name: "agent_config_set",
+        label: "agent_config_set",
+        description:
+          "Update the agent config (name, personality) for a given agent. Used during first-run bootstrap to store user-defined identity.",
+        parameters: Type.Object({
+          agentId: Type.String({ description: "Agent ID, e.g. zuzu" }),
+          patch: Type.Object(
+            {
+              name: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+              personality: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+            },
+            { description: "Fields to update" },
+          ),
+        }),
+        async execute(_id, params: { agentId: string; patch: Partial<AgentConfig> }) {
+          const config = updateAgentConfig(resolveStateDir(), params.agentId, params.patch);
+          return textResult(JSON.stringify({ ok: true, config }, null, 2), { ok: true, config });
         },
       },
       optional,

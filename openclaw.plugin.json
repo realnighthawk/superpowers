@@ -9,11 +9,13 @@
     "./bundle/skills"
   ],
   "contracts": {
-    "tools": ["user_profile_get", "user_profile_update"]
+    "tools": ["user_profile_get", "user_profile_update", "agent_config_get", "agent_config_set"]
   },
   "toolMetadata": {
     "user_profile_get": { "optional": true },
-    "user_profile_update": { "optional": true }
+    "user_profile_update": { "optional": true },
+    "agent_config_get": { "optional": true },
+    "agent_config_set": { "optional": true }
   },
   "configSchema": {
     "type": "object",
