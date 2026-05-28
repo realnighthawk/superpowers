@@ -7,7 +7,11 @@
       "description": "Assistant spawns social-agent for digest, posts to #general at 7am.",
       "enabled": true,
       "agentId": "assistant",
-      "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * *",
+        "tz": "America/Los_Angeles"
+      },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
@@ -15,7 +19,9 @@
         "message": "Morning briefing. Fetch today's calendar events via gog. Spawn social-agent with calendar data and pending tasks from memory. Vet the digest. Post to integrations.discordGeneralChannelId.",
         "lightContext": true
       },
-      "delivery": { "mode": "silent" },
+      "delivery": {
+        "mode": "silent"
+      },
       "state": {}
     },
     {
@@ -24,7 +30,11 @@
       "description": "Fitness coach builds plan if not done today, spawns assistant to post to #fitness.",
       "enabled": true,
       "agentId": "fitness-coach",
-      "schedule": { "kind": "cron", "expr": "0 7 * * *", "tz": "America/Los_Angeles" },
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * *",
+        "tz": "America/Los_Angeles"
+      },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
@@ -32,16 +42,22 @@
         "message": "Daily fitness check-in (America/Los_Angeles). If coaching.fitness.lastDailyPlanDate is not today: build workout + diet plan, spawn assistant (personal ops only: post fitness-chart, update lastDailyPlanDate). If already planned today: return CHECKIN_DONE.",
         "lightContext": true
       },
-      "delivery": { "mode": "silent" },
+      "delivery": {
+        "mode": "silent"
+      },
       "state": {}
     },
     {
       "id": "productivity-weekday-digest",
       "name": "Weekday productivity digest",
-      "description": "Assistant fetches calendar, spawns productivity-agent for daily schedule digest Mon–Fri.",
+      "description": "Assistant fetches calendar, spawns productivity-agent for daily schedule digest Mon\u2013Fri.",
       "enabled": true,
       "agentId": "assistant",
-      "schedule": { "kind": "cron", "expr": "30 8 * * 1-5", "tz": "America/Los_Angeles" },
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * 1-5",
+        "tz": "America/Los_Angeles"
+      },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
@@ -49,7 +65,9 @@
         "message": "Weekday digest. Fetch today's calendar events via gog. Spawn productivity-agent with calendar data and pending tasks from memory. Vet result. Post to integrations.discordGeneralChannelId (or #productivity if configured).",
         "lightContext": true
       },
-      "delivery": { "mode": "silent" },
+      "delivery": {
+        "mode": "silent"
+      },
       "state": {}
     },
     {
@@ -58,7 +76,11 @@
       "description": "Finance agent reviews spending and alerts every Monday at 9am.",
       "enabled": true,
       "agentId": "finance-agent",
-      "schedule": { "kind": "cron", "expr": "0 9 * * 1", "tz": "America/Los_Angeles" },
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1",
+        "tz": "America/Los_Angeles"
+      },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
@@ -66,24 +88,56 @@
         "message": "Weekly finance review. Run budget-review and finance-alert. Spawn assistant to post summary to Discord. If ALERT_NONE and no notable changes: post summary only.",
         "lightContext": true
       },
-      "delivery": { "mode": "silent" },
+      "delivery": {
+        "mode": "silent"
+      },
       "state": {}
     },
     {
       "id": "learning-weekly-recommendation",
       "name": "Weekly reading recommendation",
-      "description": "Learning agent surfaces 3–5 new resources every Sunday at 6pm.",
+      "description": "Learning agent surfaces 3\u20135 new resources every Sunday at 6pm.",
       "enabled": true,
       "agentId": "learning-agent",
-      "schedule": { "kind": "cron", "expr": "0 18 * * 0", "tz": "America/Los_Angeles" },
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 18 * * 0",
+        "tz": "America/Los_Angeles"
+      },
       "sessionTarget": "isolated",
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Weekly reading recommendation. Use reading-list skill: find 3–5 new resources on currentTopics via web-search. Add to reading list file. Spawn assistant to post to Discord.",
+        "message": "Weekly reading recommendation. Use reading-list skill: find 3\u20135 new resources on currentTopics via web-search. Add to reading list file. Spawn assistant to post to Discord.",
         "lightContext": true
       },
-      "delivery": { "mode": "silent" },
+      "delivery": {
+        "mode": "silent"
+      },
+      "state": {}
+    },
+    {
+      "id": "reminder-poll",
+      "name": "Reminder poller",
+      "description": "Check memory for due reminders every 15 minutes and post to Discord.",
+      "enabled": true,
+      "agentId": "assistant",
+      "createdAtMs": 1748390400000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/15 * * * *",
+        "tz": "America/Los_Angeles"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Run the reminder-check skill: search memory for pending reminders, post any that are due now to Discord, mark them delivered.",
+        "lightContext": true
+      },
+      "delivery": {
+        "mode": "none"
+      },
       "state": {}
     }
   ]
