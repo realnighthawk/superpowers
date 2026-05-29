@@ -1,26 +1,25 @@
 ---
 name: web-search
-description: Search the web using Exa for research, articles, and content retrieval. Use for current information not in memory.
+description: Search the web using Exa MCP for research, articles, and content retrieval. Use for current information not in memory.
 ---
 
-# Web search (Exa)
+# Web search (Exa MCP)
+
+Uses the **Exa MCP server** (`web_search_exa`, `web_fetch_exa`). Do **not** run `exa` CLI via `exec`.
+
+Requires `EXA_API_KEY` on the gateway (OpenClaw `mcp.servers.exa` → `https://mcp.exa.ai/mcp`).
 
 ## Search
 
-```bash
-exa search "<query>" --num-results 5 --text
-```
+Call **`web_search_exa`** with a focused query (5–8 words). Prefer `numResults: 5` unless the task needs more.
 
-## Retrieve full article content
+## Fetch full page
 
-```bash
-exa contents "<url>"
-```
+Call **`web_fetch_exa`** with one or more URLs when you need article body text beyond search snippets.
 
 ## Rules
 
-- Prefer specific queries (5–8 words) over broad ones
-- Always summarize results before passing upstream — never paste raw Exa output
+- Always summarize results before passing upstream — never paste raw tool output
 - For YouTube URLs: use the YouTube transcripts plugin instead
-- Cite the source URL in summaries
+- Cite source URLs in summaries
 - Use `memory_search` first — avoid redundant searches for the same query
