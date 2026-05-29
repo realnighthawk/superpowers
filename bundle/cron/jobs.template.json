@@ -132,7 +132,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "Run the reminder-check skill: search memory for pending reminders, post any that are due now to Discord, mark them delivered.",
+        "message": "Run the reminder-check skill: memory_search for openclaw-reminder pending, post due items to Discord, mark delivered with write append (no exec, no memory_write).",
         "lightContext": true
       },
       "delivery": {

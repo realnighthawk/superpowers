@@ -78,23 +78,14 @@ During every conversation turn, scan for reminder-worthy signals before respondi
 
 ### How to write a reminder
 
-Call `memory_write` directly:
+Append to `memory/YYYY-MM-DD.md` in the assistant workspace using the **`write`** tool (never `exec`, never a `memory_write` shell command):
 
-```
-type: task
-content: "Reminder at <dueAt>: <reminderText>"
-metadata:
-  subject: "reminder: <3-6 word label>"
-  scope: personal
-  topic: reminder
-  tags: ["reminder"]
-  importance: 0.8
-  confidence: 1.0
-  dueAt: "<ISO-8601 with timezone offset, e.g. 2026-05-28T15:00:00-07:00>"
-  reminderText: "<full reminder text>"
-  status: active
-  source: claude-code
-  created_from: conversation
+```markdown
+<!-- openclaw-reminder:pending id=rem-<short-random> -->
+- due: 2026-05-28T15:00:00-07:00
+  text: <full reminder text>
+  status: pending
+  channel: discord
 ```
 
 **Timezone:** always use America/Los_Angeles offset (-07:00 PDT / -08:00 PST). If the user says "3pm" without a date, assume today; if today's time has passed, assume tomorrow.

@@ -1,11 +1,13 @@
 ---
 name: reminder-check
-description: Poll memory for due reminders and post them to Discord. Used by the reminder-poll cron job only — not for conversation use.
+description: Poll memory-core daily notes for due reminders and post them to Discord. Used by the reminder-poll cron job only — not for conversation use.
 ---
 
 # Reminder check
 
-Called by the `reminder-poll` cron job every 15 minutes. Checks memory for pending reminders that are due, posts each to Discord, then marks them delivered.
+Called by the `reminder-poll` cron job every 15 minutes. Uses **memory-core** (`memory_search`, `memory_get`, `write`). There is no `memory_write` tool or CLI — never call it via `exec`.
+
+Conversation-time reminder **creation** is handled by `assistant-personal`.
 
 ## Steps
 
@@ -15,67 +17,56 @@ Called by the `reminder-poll` cron job every 15 minutes. Checks memory for pendi
 date -u +"%Y-%m-%dT%H:%M:%SZ"
 ```
 
-Note the result — this is `now`.
+Note the result — this is `now` (UTC).
 
-### 2. Search for pending reminders
+### 2. Find pending reminders
 
-Call `memory_search`:
-- query: `"reminder pending"`
-- filters: `{ "memory_type": "task" }`
-- limit: `30`
+Call `memory_search` with query: `openclaw-reminder pending` (limit 30).
 
-From results, keep only entries where **all** of:
-- `tags` includes `"reminder"`
-- `status` is `"active"` (or absent — default is active)
+For each hit, `memory_get` the snippet/file and parse blocks like:
 
-The **label** for a reminder entry is derived from its `subject` field by stripping the leading `"reminder: "` prefix. Example: subject `"reminder: call dentist friday"` → label `"call dentist friday"`. If the subject field is absent or does not start with `"reminder: "`, use the full subject string as the label.
-
-### 3. Search for already-delivered reminders
-
-Call `memory_search`:
-- query: `"reminder delivered"`
-- filters: `{ "memory_type": "event" }`
-- limit: `100`
-
-Build a set of delivered labels: entries where `tags` includes `"reminder-delivered"`. Extract the label from each subject by stripping the leading `"delivered: "` prefix. Example: subject `"delivered: call dentist friday"` → label `"call dentist friday"`.
-
-### 4. For each pending reminder
-
-For each entry from Step 2:
-
-**a. Parse `dueAt`** from metadata. Expected format: ISO-8601 with explicit timezone offset, e.g. `2026-05-28T15:00:00-07:00`. Convert both `dueAt` and `now` (from Step 1, which is UTC) to comparable timestamps before evaluating `dueAt <= now`. If `dueAt` is absent, not a string, or not parseable as ISO-8601, skip this entry and continue.
-
-**b. Check due:** is `dueAt <= now`? If not, skip.
-
-**c. Check delivered:** does the delivered set contain a subject matching `"delivered: <this label>"`? If yes, skip.
-
-**d. Post to Discord** via `message` tool:
-```
-⏰ Reminder: <reminderText from metadata>
-```
-To get the channel: call `user_profile_get` (no parameters) → parse the returned JSON → read `integrations.discordGeneralChannelId`. If that field is absent or empty, send the message as a DM to the owner user ID `490874026902683648` (nighthawk) using the Discord DM channel.
-
-**e. Mark delivered** — call `memory_write`:
-```
-type: event
-content: "Reminder delivered: reminder: <label>"
-metadata:
-  subject: "delivered: <label derived from original subject>"
-  scope: personal
-  topic: reminder
-  tags: ["reminder-delivered"]
-  importance: 0.5
-  source: claude-code
-  created_from: observation
-  status: active
+```markdown
+<!-- openclaw-reminder:pending id=rem-abc123 -->
+- due: 2026-05-30T15:00:00-07:00
+  text: call dentist
+  status: pending
+  channel: discord
 ```
 
-The content field should read: "Reminder delivered: reminder: <label>" (i.e., prepend "Reminder delivered: " to the original subject string).
+Extract `id`, `due`, `text`. Skip if `status` is not `pending` or `due` is missing/unparseable (ISO-8601 with offset).
 
-**f. Error handling:**
-- If `message` fails: do NOT write the delivered entry. The reminder will re-fire next cycle.
-- If `memory_write` (marking delivered) fails: log it but do not re-post. Acceptable — reminder was already delivered.
+### 3. Skip already delivered
 
-### 5. If no reminders are due
+Call `memory_search` with query: `openclaw-reminder:delivered` (limit 100).
 
-Exit silently. Do not post anything to Discord.
+Build a set of delivered ids from `<!-- openclaw-reminder:delivered id=<uuid>` markers. Skip any pending id in that set.
+
+### 4. For each due pending reminder
+
+**a. Check due:** convert `due` and `now` to comparable timestamps. If `due > now`, skip.
+
+**b. Post to Discord** via `message`:
+
+```
+⏰ Reminder: <text>
+```
+
+Channel: `user_profile_get` → `integrations.discordGeneralChannelId`. If absent, DM owner `490874026902683648` (nighthawk).
+
+**c. Mark delivered** — append to the same `memory/YYYY-MM-DD.md` (or today's file) with the **`write`** tool:
+
+```markdown
+<!-- openclaw-reminder:delivered id=<same-id> at=2026-05-30T15:00:05-07:00 -->
+- text: <same text>
+```
+
+Use ISO-8601 with offset for `at`.
+
+**d. Error handling**
+
+- If `message` fails: do **not** write delivered marker (re-fire next cycle).
+- If `write` fails after a successful post: log only; do not re-post.
+
+### 5. If nothing is due
+
+Exit silently. Do not post to Discord.
