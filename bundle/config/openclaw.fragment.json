@@ -121,7 +121,8 @@
             "creative-agent",
             "learning-agent",
             "sysadmin-agent",
-            "social-agent"
+            "social-agent",
+            "navigator-agent"
           ],
           "delegationMode": "prefer"
         },
@@ -454,6 +455,70 @@
         }
       },
       {
+        "id": "navigator-agent",
+        "name": "Navigator",
+        "workspace": "REPLACE_STATE_DIR/agents/navigator-agent/workspace",
+        "agentDir": "REPLACE_STATE_DIR/agents/navigator-agent/agent",
+        "model": "google/gemini-3-flash-preview",
+        "skills": [
+          "commute-plan",
+          "place-finder",
+          "trip-planner",
+          "google-maps",
+          "memory-search",
+          "summarize"
+        ],
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": [
+            "memory_search",
+            "memory_get",
+            "read",
+            "write",
+            "sessions_spawn",
+            "session_status",
+            "maps_search_nearby",
+            "maps_search_places",
+            "maps_place_details",
+            "maps_geocode",
+            "maps_reverse_geocode",
+            "maps_distance_matrix",
+            "maps_directions",
+            "maps_elevation",
+            "maps_timezone",
+            "maps_weather",
+            "maps_air_quality",
+            "maps_static_map",
+            "maps_batch_geocode",
+            "maps_search_along_route",
+            "maps_explore_area",
+            "maps_plan_route",
+            "maps_compare_places",
+            "maps_local_rank_tracker"
+          ],
+          "deny": [
+            "browser",
+            "edit",
+            "apply_patch",
+            "exec",
+            "user_profile_get",
+            "user_profile_update",
+            "message"
+          ]
+        },
+        "subagents": {
+          "allowAgents": [
+            "assistant"
+          ],
+          "delegationMode": "prefer"
+        },
+        "identity": {
+          "name": "Navigator",
+          "emoji": "\ud83d\uddfa\ufe0f",
+          "theme": "Directions, commute, traffic, places, and trip planning"
+        }
+      },
+      {
         "id": "home-agent",
         "name": "Home",
         "enabled": false,
@@ -535,5 +600,41 @@
     "ownerAllowFrom": [
       "discord:REPLACE_DISCORD_USER_ID"
     ]
+  },
+  "mcp": {
+    "servers": {
+      "exa": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote@0.1.16",
+          "https://mcp.exa.ai/mcp",
+          "--header",
+          "x-api-key:${EXA_API_KEY}"
+        ]
+      },
+      "google-maps": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@cablate/mcp-google-map",
+          "--stdio"
+        ],
+        "env": {
+          "GOOGLE_MAPS_API_KEY": "${GOOGLE_PLACES_API_KEY}"
+        }
+      }
+    }
+  },
+  "skills": {
+    "entries": {
+      "goplaces": {
+        "apiKey": {
+          "source": "env",
+          "provider": "default",
+          "id": "GOOGLE_PLACES_API_KEY"
+        }
+      }
+    }
   }
 }

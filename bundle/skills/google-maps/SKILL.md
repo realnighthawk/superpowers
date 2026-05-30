@@ -7,7 +7,17 @@ description: Geocode, search places, get directions, plan routes, and check weat
 
 Uses the **Google Maps MCP server** (`maps_*` tools). Do **not** run `goplaces` CLI via `exec`.
 
-Requires `GOOGLE_PLACES_API_KEY` on the gateway (`mcp.servers.google-maps` → `@cablate/mcp-google-map --stdio`). Enable **Places API (New)** and **Routes API** in Google Cloud.
+Requires `GOOGLE_PLACES_API_KEY` in `~/.openclaw/.env` and `mcp.servers.google-maps` in **`openclaw.json`** (not LiteLLM `config.yaml`):
+
+```json
+"google-maps": {
+  "command": "npx",
+  "args": ["-y", "@cablate/mcp-google-map", "--stdio"],
+  "env": { "GOOGLE_MAPS_API_KEY": "${GOOGLE_PLACES_API_KEY}" }
+}
+```
+
+Enable **Places API (New)** and **Routes API** in Google Cloud.
 
 ## Common tools
 

@@ -84,6 +84,14 @@ openclaw nighthawk-superpowers paths
 | `learning-agent` | Study plans, content summarization, reading lists |
 | `sysadmin-agent` | k8s, server monitoring, SSH administration |
 | `social-agent` | Daily briefings and Discord digests (local-llm) |
+| `navigator-agent` | Directions, commute, places, trip planning (Google Maps MCP) |
+
+MCP servers (merge from fragment into `openclaw.json`):
+
+| Server | Package / URL | Env |
+|--------|---------------|-----|
+| `google-maps` | `@cablate/mcp-google-map --stdio` | `GOOGLE_PLACES_API_KEY` → `GOOGLE_MAPS_API_KEY` |
+| `exa` | `https://mcp.exa.ai/mcp` | `EXA_API_KEY` |
 
 ## Development
 
