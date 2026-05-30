@@ -17,6 +17,13 @@ Call **`web_search_exa`** with a focused query (5–8 words). Prefer `numResults
 
 Call **`web_fetch_exa`** with one or more URLs when you need article body text beyond search snippets.
 
+## Never use for
+
+- Drive time, traffic, commute, ETA, directions, routes, or place search → spawn **`navigator-agent`** (Google Maps MCP), not Exa
+- Workout/diet plans, calendar/email planning, expenses → spawn the matching specialist
+
+If `delegate-routing` says `spawn:*`, do not call `web_search_exa` on that turn.
+
 ## Rules
 
 - Always summarize results before passing upstream — never paste raw tool output

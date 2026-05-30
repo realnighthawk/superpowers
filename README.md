@@ -8,7 +8,7 @@ Based on the [agent-memory](https://github.com/) / OpenClaw plugin scaffold (`de
 
 | Bundle path | Contents |
 |-------------|----------|
-| `bundle/skills/` | `assistant-personal`, `fitness-*`, `audio-transcribe`, `tts-respond`, … |
+| `bundle/skills/` | `delegate-routing`, `assistant-personal`, `fitness-*`, `google-maps`, … |
 | `bundle/agents/*/workspace/` | `AGENTS.md`, `SOUL.md`, `TOOLS.md`, … per agent |
 | `bundle/agents/assistant/workspace/user-profile.example.json` | Profile seed (no secrets) |
 | `bundle/auth/auth-profiles.template.json` | `google:free` → `GEMINI_API_KEY`, `google:paid` → `GEMINI_API_KEY_PAID`, LiteLLM for `openai` |

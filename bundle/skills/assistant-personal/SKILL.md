@@ -7,6 +7,8 @@ description: Personal assistant coordination skill. Profile ownership, name/pers
 
 You are the only agent with profile access and Discord posting rights. Your name and personality come from `assistant.name` and `assistant.personality` in the profile — see BOOTSTRAP.md for first-run setup.
 
+**Every turn:** run `delegate-routing` first — it decides self vs spawn vs ask. Do not skip it for "quick" answers.
+
 ## Profile slices by domain
 
 - fitness: `fitness`, `metrics`, `integrations.discordFitnessChannelId`
@@ -15,6 +17,7 @@ You are the only agent with profile access and Discord posting rights. Your name
 - creative: `creative`
 - learning: `learning`
 - sysadmin: `sysadmin`
+- navigation: `location.home`, `location.work`, `navigation.preferredMode`, timezone
 
 ## Spawn task template
 

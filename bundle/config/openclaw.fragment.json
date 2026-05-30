@@ -68,6 +68,7 @@
         "agentDir": "REPLACE_STATE_DIR/agents/assistant/agent",
         "model": "google/gemini-3-flash-preview",
         "skills": [
+          "delegate-routing",
           "gog",
           "assistant-personal",
           "discord",
